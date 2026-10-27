@@ -1,77 +1,50 @@
-using System;
-using System.Diagnostics;
-using System.Windows;
-
-namespace StupApp
-{
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-            this.Loaded += MainWindow_Loaded;
-        }
-
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            RunCheckScript();
-        }
-
-        private void RunCheckScript()
-        {
-            try
-            {
-                ProcessStartInfo start = new ProcessStartInfo
-                {
-                    FileName = "python",
-                    Arguments = "check.py",
-                    UseShellExecute = true,
-                    CreateNoWindow = false
-                };
+<Window x:Class="StupApp.MainWindow"
+        xmlns="http://microsoft.com"
+        xmlns:x="http://microsoft.com"
+        Title="Stup Launcher" Height="350" Width="480"
+        Background="#17191C" WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" BorderBrush="#1793D1" BorderThickness="1">
+    
+    <Grid>
+        <Border Margin="20">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
                 
-                Process? process = Process.Start(start);
-                if (process != null)
-                {
-                    process.WaitForExit();
-                    if (process.ExitCode != 0)
-                    {
-                        MessageBox.Show("System check failed! Please fix the errors in terminal before playing.", "Stup Launcher - Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Could not run system check: " + ex.Message, "Stup Launcher - Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+                <TextBlock Text="STUP LAUNCHER" 
+                           Foreground="#1793D1" 
+                           FontSize="22" 
+                           FontWeight="Black" 
+                           HorizontalAlignment="Center" 
+                           Margin="0,0,0,30"
+                           LetterSpacing="4"/>
 
-        private void RunPythonScript(string scriptName)
-        {
-            try
-            {
-                ProcessStartInfo start = new ProcessStartInfo
-                {
-                    FileName = "python",
-                    Arguments = scriptName,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
-                Process.Start(start);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error launching script: " + ex.Message, "Stup Launcher - Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+                <Button Name="BtnRoblox" Content="LAUNCH ROBLOX" Height="50" Margin="0,0,0,15"
+                        Background="#212429" Foreground="#FFFFFF" FontSize="14" FontWeight="Bold"
+                        Cursor="Hand" BorderBrush="#1793D1" BorderThickness="1" Click="BtnRoblox_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="2"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
 
-        private void BtnRoblox_Click(object sender, RoutedEventArgs e)
-        {
-            RunPythonScript("roblox.py");
-        }
+                <Button Name="BtnStudio" Content="LAUNCH ROBLOX STUDIO" Height="50" Margin="0,0,0,20"
+                        Background="#212429" Foreground="#FFFFFF" FontSize="14" FontWeight="Bold"
+                        Cursor="Hand" BorderBrush="#333333" BorderThickness="1" Click="BtnStudio_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="2"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
 
-        private void BtnStudio_Click(object sender, RoutedEventArgs e)
-        {
-            RunPythonScript("studio.py");
-        }
-    }
-}
+                <TextBlock Text="SYSTEM READY" 
+                           Foreground="#444444" 
+                           FontSize="10" 
+                           FontWeight="Medium" 
+                           HorizontalAlignment="Center" 
+                           LetterSpacing="2"/>
+                
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
