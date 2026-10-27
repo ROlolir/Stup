@@ -1,0 +1,11 @@
+(
+echo ^<Project Sdk="Microsoft.NET.Sdk"^>
+echo   ^<PropertyGroup^>
+echo     ^<OutputType^>WinExe^</OutputType^>
+echo     ^<TargetFramework^>net8.0-windows^</TargetFramework^>
+echo     ^<Nullable^>enable^</Nullable^>
+echo     ^<ImplicitUsings^>enable^</ImplicitUsings^>
+echo     ^<UseWPF^>true^</UseWPF^>
+echo   ^</PropertyGroup^>
+echo ^</Project^>
+) > StupApp.csproj
